@@ -15117,6 +15117,7 @@ xmlCtxtUseOptionsInternal(xmlParserCtxtPtr ctxt, int options, const char *encodi
         options -= XML_PARSE_BIG_LINES;
     }
     ctxt->linenumbers = 1;
+	ctxt->options |= XML_PARSE_BIG_LINES;
     return (options);
 }
 
@@ -15224,7 +15225,7 @@ xmlReadFile(const char *filename, const char *encoding, int options)
     xmlParserCtxtPtr ctxt;
 
     xmlInitParser();
-    ctxt = xmlCreateURLParserCtxt(filename, options);
+    ctxt = xmlCreateURLParserCtxt(filename, options | XML_PARSE_BIG_LINES);
     if (ctxt == NULL)
         return (NULL);
     return (xmlDoRead(ctxt, NULL, encoding, options, 0));
